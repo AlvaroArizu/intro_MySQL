@@ -153,3 +153,93 @@ Es un conjunto de uno o más atributos que "juntos" permiten identificar de form
 - Considerar cuáles son los problemas que hay que resolver y las tareas que los usuarios deberán completar.
 - Crear Bases de Datos Normalizadas.
 - Evitar el almacenamiento de información duplicada, inconsistencias en la base de datos, anomalías y problemas de pérdida de la información.
+
+# Resumen de Cláusulas JOIN en SQL
+
+## Generalidades de JOIN
+- **JOIN** se utiliza para combinar filas de dos o más tablas, basándose en una columna relacionada entre ellas.
+- La cantidad de joins necesarios es igual a la cantidad de tablas involucradas menos uno.
+
+## Sintaxis de JOIN
+Existen dos formas de sintaxis para realizar un JOIN cuando los campos en común tienen nombres diferentes:
+
+1. **Usando JOIN ON**:
+
+```sql
+SELECT tabla1.campos, tabla2.campos
+FROM tabla1
+JOIN tabla2 ON tabla1.campo1 = tabla2.campo1
+WHERE condición;
+```
+
+2. Usando FROM y WHERE:
+```sql
+SELECT tabla1.campos, tabla2.campos
+FROM tabla1, tabla2
+WHERE tabla1.campo1 = tabla2.campo1
+AND condición;
+```
+- En ambas sintaxis, si los campos por los cuales se combinan las tablas tienen el mismo nombre, se deben prefijar con el nombre de la tabla (tabla.campo).
+- La tabla especificada primero es considerada la "tabla de la izquierda" y la siguiente es la "tabla de la derecha".
+
+### Tipos de JOIN
+- LEFT [OUTER] JOIN: Devuelve todos los registros de la tabla de la izquierda y los registros coincidentes de la derecha. Si no hay coincidencia, el resultado es NULL en el lado derecho de la salida.
+```sql
+SELECT * FROM tabla1
+LEFT JOIN tabla2 ON tabla1.codigo = tabla2.codigo;
+```
+- RIGHT [OUTER] JOIN: Devuelve todos los registros de la tabla de la derecha y los registros coincidentes de la izquierda. Si no hay coincidencia, el resultado es NULL en el lado izquierdo de la salida
+
+```sql
+SELECT * FROM tabla1
+RIGHT JOIN tabla2 ON tabla1.codigo = tabla2.codigo;
+```
+- CROSS JOIN: Produce un producto cartesiano entre las dos tablas, combinando cada fila de la primera tabla con cada fila de la segunda tabla.
+```sql
+SELECT * FROM tabla1 CROSS JOIN tabla2;
+```
+
+**Inner Join** es un tipo de operación en SQL que se utiliza para combinar filas de dos o más tablas, basándose en una condición de coincidencia especificada. Devuelve solo las filas en las que hay al menos una coincidencia en ambas tablas. Si no hay coincidencia entre las filas de las tablas, entonces las filas no aparecen en el resultado.
+
+## Características del Inner Join:
+- Combina filas de dos o más tablas.
+- Requiere al menos una columna común en ambas tablas, la cual es utilizada para la comparación.
+- Solo devuelve las filas que cumplen con la condición de coincidencia.
+
+### Ejemplo de Inner Join:
+Supongamos que tenemos dos tablas: `Empleados` y `Departamentos`. La tabla `Empleados` tiene una columna `DepartamentoID` que enlaza con la columna `ID` de la tabla `Departamentos`.
+
+Tabla `Empleados`:
+
+| EmpleadoID | Nombre   | DepartamentoID |
+|------------|----------|----------------|
+| 1          | Juan     | 2              |
+| 2          | Ana      | 1              |
+| 3          | Carlos   | 3              |
+
+Tabla `Departamentos`:
+
+| ID | Nombre       |
+|----|--------------|
+| 1  | Recursos HR  |
+| 2  | IT           |
+| 3  | Mantenimiento|
+
+Si queremos obtener una lista de todos los empleados junto con la información de su departamento, podríamos usar un **INNER JOIN** de la siguiente manera:
+
+```sql
+SELECT Empleados.Nombre, Departamentos.Nombre AS Departamento
+FROM Empleados
+INNER JOIN Departamentos ON Empleados.DepartamentoID = Departamentos.ID;
+```
+**Resultado:**
+
+| Nombre | Departamento    |
+|--------|-----------------|
+| Juan   | IT              |
+| Ana    | Recursos HR    |
+| Carlos | Mantenimiento   |
+
+Este ejemplo muestra cómo el INNER JOIN combina las filas de las tablas Empleados y Departamentos basándose en la coincidencia de DepartamentoID en Empleados con ID en Departamentos, retornando solo las filas que tienen una coincidencia en ambas tablas.
+
+Copy code

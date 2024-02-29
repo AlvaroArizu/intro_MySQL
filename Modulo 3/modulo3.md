@@ -191,12 +191,14 @@ En SQL existen funciones que nos permiten contar registros, calcular sumas, prom
 ### Función `COUNT()`
 
 - **Propósito:** Retorna la cantidad de valores que contiene un campo especificado.
+- PERMITE CONTAR REGISTROS
 - **Ejemplo:** 
   - `SELECT COUNT(*) FROM Productos;`
 
 ### Función `SUM()`
 
 - **Propósito:** Retorna la suma de los valores que contiene un campo especificado.
+- PERMITE SUMAR LOS VALORES NUMERIOS DE UN CAMPO
 - **Ejemplo:** 
   - `SELECT SUM(Stock) FROM Productos;`
 
@@ -204,17 +206,20 @@ En SQL existen funciones que nos permiten contar registros, calcular sumas, prom
 
 - **Propósito:** Permite calcular el valor mínimo de un campo.
 - **Ejemplo:** 
+- PERMITE OBTENER EL VALOR MAS BAJO DE UN CONJUTNO DE VALORES NUMERICOS DE UN CAMPO
   - `SELECT MIN(Precio) FROM Productos;`
 
 ### Función `MAX()`
 
 - **Propósito:** Permite averiguar el valor máximo de un campo.
 - **Ejemplo:** 
+- PERMITE OBTENER EL VALOR MAS ALTO DE UN CONJUTNO DE VALORES NUMERICOS DE UN CAMPO
   - `SELECT MAX(Precio) FROM Productos;`
 
 ### Función `AVG()`
 
 - **Propósito:** Retorna el valor promedio de los valores del campo especificado.
+- PERMITE PROMEDIAR LOS VALORES NUMERICOS DE UN CAMPO
 - **Ejemplo:** 
   - `SELECT AVG(Precio) FROM Productos;`
 
